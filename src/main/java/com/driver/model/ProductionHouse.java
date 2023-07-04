@@ -15,13 +15,14 @@ public class ProductionHouse {
     @Column(unique = true)
     private String name;
 
-    private double ratings;
+    private double ratings=0;
 
     @OneToMany(mappedBy = "productionHouse",cascade = CascadeType.ALL)
     private List<WebSeries> webSeriesList;
 
     public ProductionHouse(String name) {
         this.name = name;
+        this.ratings=0;
         this.webSeriesList = new ArrayList<>();
     }
 
@@ -53,10 +54,11 @@ public class ProductionHouse {
     }
 
     public double getRatings() {
-        return ratings;
+
+        return ratings/webSeriesList.size();
     }
 
     public void setRatings(double ratings) {
-        this.ratings = ratings;
+        this.ratings+=ratings;
     }
 }
